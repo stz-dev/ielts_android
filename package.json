@@ -1,0 +1,1 @@
+{"name":"ielts-plan","version":"1.0.0","private":true,"description":"IELTS 7.5 plan tracker","dependencies":{"@capacitor/android":"^8.6.2","@capacitor/cli":"^8.6.2","@capacitor/core":"^8.6.2"}}
