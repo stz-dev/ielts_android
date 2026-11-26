@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS 7.5 за 18 месяцев — план и трекер</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--mut:#6b6a64;--line:#e4e2da;--acc:#1f6f5c;--acc2:#e8f2ef;--warn:#b4531a}
+@media(prefers-color-scheme:dark){:root{--bg:#16171a;--card:#1f2125;--ink:#ecebe6;--mut:#9a998f;--line:#32343a;--acc:#4cc2a4;--acc2:#1c2e2a;--warn:#e89a62}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:16px 14px 80px}
+h1{font-size:22px;margin:4px 0 2px}
+h2{font-size:18px;margin:0 0 8px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 12px}
+.tabs{display:flex;gap:6px;margin:0 0 12px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5}
+.tabs button{flex:1;padding:10px 4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:inherit;font-size:14px}
+.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;margin:6px 0}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.btn{padding:9px 14px;border-radius:10px;border:1px solid var(--acc);background:var(--acc2);color:var(--ink);font:inherit;font-size:14px}
+.btn.solid{background:var(--acc);color:#fff}
+input[type=date]{font:inherit;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut);font-weight:600}
+td.n,th.n{text-align:right;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px}
+details>summary{list-style:none;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+details>summary::-webkit-details-marker{display:none}
+.ph>summary{font-weight:700}
+.tag{font-size:12px;color:var(--mut);font-weight:400}
+.in{padding:0 12px 10px}
+.m{border-top:1px solid var(--line)}
+.m>summary{font-weight:600;font-size:15px}
+.m.cur>summary{color:var(--acc)}
+.t{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:15px}
+.t input{width:22px;height:22px;margin-top:1px;accent-color:var(--acc);flex:none}
+.t.done span{color:var(--mut);text-decoration:line-through}
+.t.ms span{font-weight:600;color:var(--warn)}
+.t.done.ms span{color:var(--mut)}
+.small{font-size:13px;color:var(--mut)}
+ul{margin:6px 0;padding-left:20px}
+li{margin:3px 0}
+.note{border-left:4px solid var(--warn);padding-left:10px;font-size:14px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>IELTS 7.5 за 18 месяцев</h1>
+<p class="sub">Из B1 до 7.5 · около 950 часов · 10–15 часов в неделю</p>
+
+<div class="tabs" id="tabs">
+<button data-t="track" class="on">Трекер</button>
+<button data-t="rhythm">Режим</button>
+<button data-t="src">Источники</button>
+<button data-t="sync">Синхр.</button>
+</div>
+
+<section id="track">
+<div class="card">
+<div class="row"><b>Выполнено задач</b><span id="pt">0%</span></div>
+<div class="bar"><i id="pb"></i></div>
+<div class="row" style="margin-top:12px"><b>Часы занятий</b><span id="ht">0 / 950</span></div>
+<div class="bar"><i id="hb"></i></div>
+<div class="btns">
+<button class="btn solid" data-h="0.5">+0.5 ч</button>
+<button class="btn" data-h="1">+1 ч</button>
+<button class="btn" data-h="2">+2 ч</button>
+<button class="btn" data-h="-0.5">−0.5 ч</button>
+</div>
+<div class="row" style="margin-top:12px"><span>Старт плана</span><input type="date" id="start"></div>
+<div class="small" id="now"></div>
+</div>
+<div id="plan"></div>
+<p class="small">Отметки и часы хранятся на этом устройстве. Чтобы они совпадали на телефоне и ПК, настройте вкладку «Синхр.».</p>
+</section>
+
+<section id="rhythm" class="hide">
+<div class="card note">Честно: путь B1 → 7.5 в среднем требует 900–1200 часов осмысленной практики. 18 месяцев по 10–15 часов в неделю — это реально, но только при регулярности. Пропуск недели лучше компенсировать короткими занятиями, чем «наверстывать» в выходные.</div>
+<div class="card">
+<h2>Часов в неделю по фазам</h2>
+<table>
+<tr><th>Навык</th><th class="n">Ф1</th><th class="n">Ф2</th><th class="n">Ф3</th><th class="n">Ф4</th></tr>
+<tr><td>Грамматика</td><td class="n">2.5</td><td class="n">1.5</td><td class="n">1</td><td class="n">—</td></tr>
+<tr><td>Словарь</td><td class="n">2</td><td class="n">1.5</td><td class="n">1.5</td><td class="n">—</td></tr>
+<tr><td>Listening</td><td class="n">2</td><td class="n">2.5</td><td class="n">2.5</td><td class="n">2</td></tr>
+<tr><td>Reading</td><td class="n">1.5</td><td class="n">2.5</td><td class="n">2.5</td><td class="n">2</td></tr>
+<tr><td>Speaking</td><td class="n">1.5</td><td class="n">2</td><td class="n">2.5</td><td class="n">2</td></tr>
+<tr><td>Writing</td><td class="n">1</td><td class="n">2</td><td class="n">3.5</td><td class="n">2.5</td></tr>
+<tr><td>Полные пробные тесты</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">4</td></tr>
+<tr><td>Разбор ошибок</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">2</td></tr>
+<tr><th>Итого</th><th class="n">10.5</th><th class="n">12</th><th class="n">13.5</th><th class="n">14.5</th></tr>
+</table>
+</div>
+<div class="card">
+<h2>Как выглядит неделя</h2>
+<ul>
+<li><b>Пн–Пт: 1.5–2 ч в день.</b> Одно «тяжёлое» занятие (грамматика или writing, 45–60 мин) + одно лёгкое (listening, чтение, Anki).</li>
+<li><b>Суббота: 2–3 ч.</b> Речь с репетитором или записью себя + проверка письменных работ.</li>
+<li><b>Воскресенье: 2–3 ч.</b> Таймированный тест или его часть, затем разбор ошибок. Это самое важное занятие недели.</li>
+<li><b>Каждый день, 15 минут:</b> Anki (повторение слов). Не пропускайте, иначе очередь вырастет.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Методы, которые дают результат</h2>
+<ul>
+<li><b>Журнал ошибок.</b> Каждая ошибка из тестов и эссе — в таблицу: что, почему, правильный вариант. Раз в неделю перечитывать.</li>
+<li><b>Диктант (Listening).</b> Короткий отрывок 1–2 мин: слушаете, пишете, сверяете с транскриптом. Затем shadowing — повтор вслух вместе с диктором.</li>
+<li><b>Интервальные повторения.</b> 8–10 новых слов в день в Anki, только с примером предложения и коллокациями, а не одиночные слова.</li>
+<li><b>Запись речи.</b> Отвечаете на вопрос Part 2 на 2 минуты, записываете, слушаете, переписываете слабые фразы, записываете снова.</li>
+<li><b>Writing с обратной связью.</b> Эссе без проверки почти не растёт. Нужен репетитор или Write &amp; Improve, плюс переписывание по замечаниям.</li>
+<li><b>Тесты по таймеру.</b> С фазы 2 всегда с таймером и без пауз; целиком — раз в неделю в фазе 4.</li>
+<li><b>Метод «разобрать, потом перепройти».</b> После теста выяснить, почему ответ неверный, и только потом идти дальше.</li>
+</ul>
+</div>
+</section>
+
+<section id="src" class="hide">
+<div class="card">
+<h2>Основные материалы</h2>
+<ul>
+<li><b>Cambridge IELTS 10–19</b> (официальные тесты) — главный источник для проверки уровня и тренировок. Начинать с 10–13, свежие 17–19 оставить на фазу 4.</li>
+<li><b>The Official Cambridge Guide to IELTS</b> — формат, стратегии, задания по каждому навыку.</li>
+<li><b>Британский совет и IDP</b> — бесплатные пробные материалы и информация о регистрации.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Грамматика</h2>
+<ul>
+<li>Murphy, <i>English Grammar in Use</i> (Intermediate) → <i>Advanced Grammar in Use</i>.</li>
+<li>Cambridge Dictionary (онлайн) для проверки примеров.</li>
+</ul>
+<h2>Словарь</h2>
+<ul>
+<li><i>English Vocabulary in Use</i>: Pre-intermediate → Intermediate → Upper-intermediate → Advanced.</li>
+<li><i>Academic Vocabulary in Use</i> и <i>Collins Vocabulary for IELTS</i> для фазы 3.</li>
+<li>Anki — карточки с примерами предложений.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Listening</h2>
+<ul>
+<li>BBC Learning English: 6 Minute English (фаза 1–2).</li>
+<li>TED и TED-Ed с транскриптами; подкасты BBC и ABC (Australia) для разных акцентов.</li>
+<li>Тесты Cambridge IELTS — секции 1–4.</li>
+</ul>
+<h2>Reading</h2>
+<ul>
+<li>Фаза 1: graded readers уровня B1–B2, BBC News Learning English.</li>
+<li>Фаза 2–3: BBC News, The Guardian, The Economist, Scientific American, Aeon.</li>
+<li>Тесты Cambridge IELTS по таймеру.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Speaking</h2>
+<ul>
+<li>Репетитор на italki или Preply: 1 раз в неделю в фазе 1–2, 1–2 раза в неделю в фазе 3–4.</li>
+<li>Запись на телефон (самопроверка), приложение ELSA Speak для произношения.</li>
+<li>Банки вопросов Part 1–3 из Cambridge IELTS и открытые подборки тем.</li>
+</ul>
+<h2>Writing</h2>
+<ul>
+<li>Write &amp; Improve (Cambridge) — бесплатная обратная связь по уровню.</li>
+<li>Репетитор или преподаватель IELTS для оценки по четырём критериям.</li>
+<li>Разборы эссе band 7+ на ielts-simon.com и ieltsliz.com.</li>
+</ul>
+<p class="small">Названия сайтов и книг проверьте перед покупкой: ссылки и издания меняются.</p>
+</div>
+</section>
+</div>
+
+<section id="sync" class="hide">
+<div class="card">
+<h2>Синхронизация телефон ↔ ПК</h2>
+<p class="small">Отметки и часы отправляются в вашу личную базу Firebase (бесплатно) и подтягиваются на других устройствах. Один и тот же адрес и код нужно ввести на каждом устройстве.</p>
+<div class="row"><span>Адрес базы</span></div>
+<input type="url" id="fbu" placeholder="https://имя-default-rtdb.…firebasedatabase.app" style="width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit">
+<div class="row" style="margin-top:10px"><span>Код синхронизации</span></div>
+<input type="text" id="fbc" placeholder="длинный секретный код" style="width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit">
+<div class="btns">
+<button class="btn" id="gen">Создать код</button>
+<button class="btn solid" id="syncnow">Синхронизировать</button>
+</div>
+<p class="small" id="sst"></p>
+</div>
+<div class="card">
+<h2>Настройка Firebase (один раз, 5 минут)</h2>
+<ol>
+<li>Откройте console.firebase.google.com, войдите через Google и создайте проект (Google Analytics можно отключить).</li>
+<li>В меню слева: Build → Realtime Database → Create Database. Регион любой, режим «locked».</li>
+<li>Откройте вкладку Rules, вставьте правила ниже и нажмите Publish.</li>
+<li>На вкладке Data скопируйте адрес вверху (начинается с https://) и вставьте сюда в «Адрес базы».</li>
+<li>Нажмите «Создать код», затем «Синхронизировать». Адрес и код введите так же на втором устройстве.</li>
+</ol>
+<pre style="white-space:pre-wrap;background:var(--acc2);padding:10px;border-radius:8px;font-size:13px">{"rules":{"ielts":{"$code":{".read":true,".write":true}}}}</pre>
+<p class="small">Данные доступны только тому, кто знает ваш код, поэтому не показывайте его другим. Внутри только галочки и число часов.</p>
+</div>
+</section>
+
+<script>
+var PHASES=[
+{n:"Фаза 1 · Фундамент (B1 → B2)",tag:"месяцы 1–5 · цель 5.5–6.0 · 10.5 ч/нед",hrs:226,m:[
+["Старт и диагностика",["Пройти пробный Listening и Reading (Cambridge IELTS или бесплатный тест) и записать баллы","Murphy Intermediate: юниты 1–30","Поставить Anki, 8 новых слов в день","6 Minute English 3 раза в неделю","Завести журнал ошибок (таблица)","Контроль: ежедневная привычка 4 недели подряд"]],
+["Грамматика и слух",["Murphy Intermediate: юниты 31–70","Vocabulary in Use Intermediate: юниты 1–20","Диктант 15 мин, 4 раза в неделю","Записывать голос 5 мин в день","Найти репетитора для разговора"]],
+["Первые тексты",["Murphy Intermediate: юниты 71–110","Писать абзацы 80–100 слов, 2 в неделю (Write & Improve)","Читать статьи BBC уровня B2, 3 в неделю","TED-Ed с транскриптом, 2 в неделю","Первое занятие с репетитором, затем 1 раз в неделю"]],
+["Закрепление",["Murphy Intermediate: юниты 111–145","Vocabulary in Use Intermediate: юниты 21–50","Короткое эссе 150 слов, 1 в неделю","Одна секция Reading из Cambridge IELTS по таймеру","Одна секция Listening из Cambridge IELTS"]],
+["Контрольный срез 1",["Полный Listening + Reading из Cambridge IELTS по таймеру","Разобрать каждую ошибку в журнале","Ориентир: 5.5–6.0 по каждой части","Скорректировать план фазы 2 по слабым местам"],1]
+]},
+{n:"Фаза 2 · Формат IELTS (B2 → низкий C1)",tag:"месяцы 6–10 · цель 6.5 · 12 ч/нед",hrs:258,m:[
+["Знакомство с форматом",["Прочитать Official Cambridge Guide: разделы по всем четырём частям","Listening: секции 1–2 из Cambridge IELTS 10–11","Reading: типы заданий (T/F/NG, matching headings)","Vocabulary Upper-intermediate: юниты 1–20","Speaking: разобрать формат Part 1, 2, 3"]],
+["Writing Task 1",["Научиться описывать графики, таблицы, диаграммы","Научиться описывать процессы и карты","1 Task 1 в неделю и проверка","Vocabulary Upper-intermediate: юниты 21–50","Speaking Part 1–2 на записи, 3 раза в неделю"]],
+["Writing Task 2",["Типы эссе: мнение, обсуждение, проблема-решение, двухчастный вопрос","1 эссе Task 2 в неделю и проверка преподавателем","Advanced Grammar in Use: старт, 3 юнита в неделю","Listening: секции 3–4","Тесты Reading из Cambridge IELTS 11–12"]],
+["Скорость и разговор",["Reading: полные тесты по 60 минут, 1 в неделю","Speaking Part 3: развёрнутые ответы, 3 раза в неделю","Репетитор: Speaking mock 1 раз в неделю","Диктанты: сложные отрывки (лекции, интервью)","Эссе: переписывать по замечаниям"]],
+["Контрольный срез 2",["Полный тест из 4 частей (Cambridge IELTS 13–14)","Разобрать ошибки и обновить журнал","Ориентир: 6.5 по каждой части","Выбрать самый слабый навык для усиления в фазе 3"],1]
+]},
+{n:"Фаза 3 · Углубление (C1)",tag:"месяцы 11–15 · цель 7.0–7.5 · 13.5 ч/нед",hrs:290,m:[
+["Академический язык",["Academic Vocabulary in Use: юниты 1–25","Коллокации и перефразирование (paraphrasing)","2 эссе Task 2 в неделю","Advanced Grammar in Use: сложные предложения","Listening: 2 полных теста в неделю"]],
+["Слух и чтение",["Reading: академические статьи (The Economist, Aeon)","Listening: разные акценты (британский, австралийский, американский)","Тесты Cambridge IELTS 15–16 по секциям","Эссе с проверкой, 2 в неделю","Speaking mock 1 раз в неделю"]],
+["Критерии band 7",["Разобрать критерии Writing: Task Response, Coherence, Lexical Resource, Grammar","Переписать 4 старых эссе по критериям","Speaking: 2 mock в неделю с репетитором","Идиомы и естественные фразы в речи","Разбор самых частых ошибок из журнала"]],
+["Работа со слабым местом",["Выделить 1 слабый навык и дать ему +3 часа в неделю","Полный тест из 4 частей раз в неделю","Task 1 и Task 2 по таймеру: 20 и 40 минут","Запись Speaking Part 2 и разбор","Читать/слушать на английском каждый день вне плана"]],
+["Контрольный срез 3",["Полный тест из 4 частей (Cambridge IELTS 16–17)","Ориентир: 7.0–7.5","Подробный разбор: где теряются баллы","Проверить даты IELTS и выбрать центр и формат (бумага или компьютер)"],1]
+]},
+{n:"Фаза 4 · Экзамен",tag:"месяцы 16–18 · цель 7.5 · 14.5 ч/нед",hrs:187,m:[
+["Режим экзамена",["Полный тест раз в неделю в экзаменационных условиях (утро, по времени)","3 эссе в неделю: Task 1 и 2","Cambridge IELTS 17–19 для финальных тренировок","Разбор ошибок после каждого теста (минимум 2 часа)","Зарегистрироваться на экзамен"]],
+["Сдача",["Два полных теста в первую неделю, затем сократить нагрузку","За 3 дня: только повторение, без новых тем","Выспаться, проверить документы и маршрут","СДАТЬ IELTS","Записать впечатления и оценки по частям"],1],
+["Резерв",["Получить результат и сравнить с целью","Если ниже цели: найти слабую часть и 6–8 недель точечной подготовки","Пересдача (при необходимости)","Отпраздновать результат"]]
+]}
+];
+var KEY="ielts-plan-v2",SK="ielts-sync-cfg";
+var S={done:{},un:{},hours:0,hTs:0,start:"",sTs:0};
+var C={fb:"",code:""};
+try{var raw=localStorage.getItem(KEY)||localStorage.getItem("ielts-plan-v1");if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
+try{var c=localStorage.getItem(SK);if(c)C=Object.assign(C,JSON.parse(c))}catch(e){}
+if(!S.un)S.un={};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function saveC(){try{localStorage.setItem(SK,JSON.stringify(C))}catch(e){}}
+function isDone(id){return (S.done[id]||0)>(S.un[id]||0)}
+function setDone(id,v){var t=Date.now();if(v)S.done[id]=t;else S.un[id]=t;save();push()}
+if(!S.start){var d=new Date(),k=(8-d.getDay())%7||7;d.setDate(d.getDate()+k);S.start=d.toISOString().slice(0,10)}
+var timer=null,busy=false;
+function url(){var b=(C.fb||"").trim().replace(/\/+$/,""),cd=(C.code||"").trim();return b&&cd?b+"/ielts/"+encodeURIComponent(cd)+".json":""}
+function msg(t){var e=document.getElementById("sst");if(e)e.textContent=t}
+function pub(){return {done:S.done,un:S.un,hours:S.hours,hTs:S.hTs,start:S.start,sTs:S.sTs}}
+function mergeIn(R){
+ var ch=false;if(!R)return ch;
+ ["done","un"].forEach(function(f){var r=R[f]||{};for(var k in r){if(!((S[f][k]||0)>=r[k])){S[f][k]=r[k];ch=true}}});
+ if((R.hTs||0)>(S.hTs||0)){S.hours=R.hours||0;S.hTs=R.hTs;ch=true}
+ if((R.sTs||0)>(S.sTs||0)&&R.start){S.start=R.start;S.sTs=R.sTs;ch=true}
+ return ch;
+}
+function applyChecks(){
+ document.querySelectorAll(".t input").forEach(function(cb){var v=isDone(cb.dataset.id);cb.checked=v;cb.parentNode.classList.toggle("done",v)});
+ document.getElementById("start").value=S.start;stats();where();
+}
+function sync(manual){
+ var u=url();
+ if(!u){if(manual)msg("Укажите адрес базы и код.");return}
+ if(busy)return;busy=true;msg("Синхронизация…");
+ fetch(u).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(R){
+  var ch=mergeIn(R);save();if(ch)applyChecks();
+  return fetch(u,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(pub())});
+ }).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);busy=false;msg("Синхронизировано в "+new Date().toLocaleTimeString("ru-RU"))})
+ .catch(function(e){busy=false;msg("Ошибка: "+e.message+". Проверьте адрес, правила и интернет.")});
+}
+function push(){if(!url())return;clearTimeout(timer);timer=setTimeout(function(){sync(false)},1500)}
+var total=0,mi=0,plan=document.getElementById("plan");
+function build(){
+ plan.innerHTML="";total=0;mi=0;
+ PHASES.forEach(function(p,pi){
+  var det=document.createElement("details");det.className="ph";det.open=pi===0;
+  var cnt=0;p.m.forEach(function(m){cnt+=m[1].length});
+  det.innerHTML='<summary><span>'+p.n+'<br><span class="tag">'+p.tag+'</span></span><span class="tag" id="pc'+pi+'"></span></summary>';
+  var inn=document.createElement("div");inn.className="in";
+  p.m.forEach(function(m,mj){
+   mi++;var num=mi;
+   var md=document.createElement("details");md.className="m";md.dataset.m=num;
+   md.innerHTML='<summary><span>Месяц '+num+': '+m[0]+'</span><span class="tag" id="mc'+num+'"></span></summary>';
+   var box=document.createElement("div");box.className="in";
+   m[1].forEach(function(t,ti){
+    total++;
+    var id=pi+"-"+mj+"-"+ti;
+    var ms=(ti===m[1].length-1&&m[2]!==undefined&&0)||(m[2]&&ti===m[1].length-1)||(m[3]);
+    var lab=document.createElement("label");lab.className="t"+(ti===m[1].length-1&&(mj===p.m.length-1||m[2])?" ms":"");
+    var cb=document.createElement("input");cb.type="checkbox";cb.checked=isDone(id);cb.dataset.id=id;
+    cb.addEventListener("change",function(){setDone(id,cb.checked);lab.classList.toggle("done",cb.checked);stats()});
+    var sp=document.createElement("span");sp.textContent=t;
+    if(cb.checked)lab.classList.add("done");
+    lab.appendChild(cb);lab.appendChild(sp);box.appendChild(lab);
+   });
+   md.appendChild(box);inn.appendChild(md);
+  });
+  det.appendChild(inn);plan.appendChild(det);
+ });
+}
+function stats(){
+ var n=Object.keys(S.done).filter(isDone).length,pc=total?Math.round(n/total*100):0;
+ document.getElementById("pt").textContent=n+" / "+total+" · "+pc+"%";
+ document.getElementById("pb").style.width=pc+"%";
+ var h=Math.max(0,S.hours),hp=Math.min(100,h/950*100);
+ document.getElementById("ht").textContent=(Math.round(h*10)/10)+" / 950";
+ document.getElementById("hb").style.width=hp+"%";
+ var m=0;
+ PHASES.forEach(function(p,pi){
+  var pd=0,pt=0;
+  p.m.forEach(function(mm,mj){m++;var md=0;mm[1].forEach(function(t,ti){pt++;if(isDone(pi+"-"+mj+"-"+ti)){pd++;md++}});
+   var el=document.getElementById("mc"+m);if(el)el.textContent=md+"/"+mm[1].length});
+  var pe=document.getElementById("pc"+pi);if(pe)pe.textContent=pd+"/"+pt;
+ });
+}
+function where(){
+ var s=new Date(S.start+"T00:00:00"),now=new Date();
+ var el=document.getElementById("now");
+ var w=Math.floor((now-s)/6048e5)+1;
+ if(isNaN(w)){el.textContent="";return}
+ if(w<1){el.textContent="План начнётся "+s.toLocaleDateString("ru-RU")+". До старта: "+(1-w)+" нед.";return}
+ var mo=Math.min(18,Math.floor((w-1)/4.33)+1);
+ el.textContent="Сейчас неделя "+w+" из ~78 · месяц "+mo;
+ var cur=document.querySelector('details.m[data-m="'+mo+'"]');
+ if(cur){cur.classList.add("cur")}
+}
+document.querySelectorAll("[data-h]").forEach(function(b){b.addEventListener("click",function(){S.hours=Math.max(0,S.hours+parseFloat(b.dataset.h));S.hTs=Date.now();save();stats();push()})});
+var st=document.getElementById("start");st.value=S.start;
+st.addEventListener("change",function(){S.start=st.value;S.sTs=Date.now();save();push();document.querySelectorAll("details.m.cur").forEach(function(e){e.classList.remove("cur")});where()});
+document.querySelectorAll("#tabs button").forEach(function(b){b.addEventListener("click",function(){
+ document.querySelectorAll("#tabs button").forEach(function(x){x.classList.toggle("on",x===b)});
+ ["track","rhythm","src","sync"].forEach(function(id){document.getElementById(id).classList.toggle("hide",id!==b.dataset.t)});
+ window.scrollTo(0,0);
+})});
+build();stats();where();
+var fbu=document.getElementById("fbu"),fbc=document.getElementById("fbc");
+fbu.value=C.fb;fbc.value=C.code;
+fbu.addEventListener("change",function(){C.fb=fbu.value.trim();saveC()});
+fbc.addEventListener("change",function(){C.code=fbc.value.trim();saveC()});
+document.getElementById("gen").addEventListener("click",function(){
+ var a=new Uint8Array(16);crypto.getRandomValues(a);
+ C.code=Array.prototype.map.call(a,function(x){return("0"+x.toString(16)).slice(-2)}).join("");
+ fbc.value=C.code;saveC();msg("Код создан. Скопируйте его на другое устройство.");
+});
+document.getElementById("syncnow").addEventListener("click",function(){C.fb=fbu.value.trim();C.code=fbc.value.trim();saveC();sync(true)});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)sync(false)});
+sync(false);
+</script>
+</body>
+</html>

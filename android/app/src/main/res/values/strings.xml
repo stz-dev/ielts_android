@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">IELTS 7.5</string>
+    <string name="title_activity_main">IELTS 7.5</string>
+    <string name="package_name">com.stelzl.ieltsplan</string>
+    <string name="custom_url_scheme">com.stelzl.ieltsplan</string>
+</resources>
