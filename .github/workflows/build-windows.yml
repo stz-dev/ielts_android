@@ -1,0 +1,43 @@
+name: Build Windows EXE
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare app
+        run: |
+          mkdir pc
+          cp -r www pc/www
+          cd pc
+          npm init -y
+          npm pkg set main=main.js
+          npm pkg set author=stz
+          npm pkg set build.appId=com.stz.ieltsplan
+          npm pkg set build.productName=IELTS-7.5
+          npm pkg set build.win.target=portable
+          npm pkg set build.win.signAndEditExecutable=false --json
+          npm pkg set build.portable.artifactName=IELTS-7.5.exe
+          cat > main.js <<EOF
+          const { app, BrowserWindow, Menu } = require('electron');
+          function createWindow() {
+            Menu.setApplicationMenu(null);
+            const win = new BrowserWindow({ width: 560, height: 900 });
+            win.loadFile('www/index.html');
+          }
+          app.whenReady().then(createWindow);
+          app.on('window-all-closed', () => app.quit());
+          EOF
+          npm i -D electron electron-builder
+          npx electron-builder --win portable --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ielts-plan-windows
+          path: pc/dist/IELTS-7.5.exe
