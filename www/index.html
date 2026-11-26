@@ -1,89 +1,162 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="auto">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IELTS 7.5 за 18 месяцев — план и трекер</title>
+<title>IELTS 7.5 — план и трекер</title>
 <style>
-:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--mut:#6b6a64;--line:#e4e2da;--acc:#1f6f5c;--acc2:#e8f2ef;--warn:#b4531a}
-@media(prefers-color-scheme:dark){:root{--bg:#16171a;--card:#1f2125;--ink:#ecebe6;--mut:#9a998f;--line:#32343a;--acc:#4cc2a4;--acc2:#1c2e2a;--warn:#e89a62}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:16px 14px 80px}
-h1{font-size:22px;margin:4px 0 2px}
-h2{font-size:18px;margin:0 0 8px}
-.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 12px}
-.tabs{display:flex;gap:6px;margin:0 0 12px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5}
-.tabs button{flex:1;padding:10px 4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:inherit;font-size:14px}
-.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+:root,:root[data-theme="light"]{--bg:#f1f3f9;--card:#ffffff;--ink:#0f1a3a;--mut:#5b6685;--line:#dde2f0;--acc:#2f48d8;--acc2:#e8ecfc;--on:#ffffff;--sun:#f2b134;--warn:#b8501b;--good:#16805f;--hero:#1b2a6b;--ring:#d9def0}
+@media(prefers-color-scheme:dark){:root[data-theme="auto"]{--bg:#0c1122;--card:#141b31;--ink:#e8ecfb;--mut:#8f9cc0;--line:#252f50;--acc:#8196ff;--acc2:#1b2548;--on:#0c1122;--sun:#f5c25c;--warn:#f0a066;--good:#4fd1a4;--hero:#18235a;--ring:#26305a}}
+:root[data-theme="dark"]{--bg:#0c1122;--card:#141b31;--ink:#e8ecfb;--mut:#8f9cc0;--line:#252f50;--acc:#8196ff;--acc2:#1b2548;--on:#0c1122;--sun:#f5c25c;--warn:#f0a066;--good:#4fd1a4;--hero:#18235a;--ring:#26305a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{color-scheme:light dark}
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transition:background .25s,color .25s}
+.wrap{max-width:720px;margin:0 auto;padding:14px 16px 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h1{font:600 28px/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:-.01em;margin:6px 0 2px}
+h2{font:600 20px/1.25 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;margin:0 0 10px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 8px}
+.thb{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .2s,background .2s}
+.thb:active{transform:rotate(25deg) scale(.92)}
+.thb svg{width:20px;height:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 12px}
+.tabs{display:flex;gap:2px;margin:6px -16px 14px;padding:0 12px;position:sticky;top:0;background:var(--bg);z-index:5;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;padding:12px 12px 11px;border:0;border-bottom:3px solid transparent;background:none;color:var(--mut);font:inherit;font-size:15px;transition:color .2s,border-color .2s}
+.tabs button.on{color:var(--ink);border-bottom-color:var(--acc);font-weight:600}
+section.view{animation:fade .22s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);width:0;border-radius:6px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;margin:6px 0}
-.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.btn{padding:9px 14px;border-radius:10px;border:1px solid var(--acc);background:var(--acc2);color:var(--ink);font:inherit;font-size:14px}
-.btn.solid{background:var(--acc);color:#fff}
-input[type=date]{font:inherit;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:14px;cursor:pointer;transition:transform .12s,background .2s,border-color .2s}
+.btn:active,.go:active,.chip:active{transform:scale(.96)}
+.btn.solid{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:600}
+.btn.big{width:100%;padding:16px;font-size:17px;margin-top:12px}
+input[type=date],input[type=number],input[type=time],input[type=text],input[type=url],select,textarea{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);transition:border-color .2s}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+textarea{width:100%;min-height:76px}
+.full{width:100%}
 table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
+th,td{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left}
 th{color:var(--mut);font-weight:600}
 td.n,th.n{text-align:right;white-space:nowrap}
-details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px}
-details>summary{list-style:none;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:0 0 10px}
+details>summary{list-style:none;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
 details>summary::-webkit-details-marker{display:none}
-.ph>summary{font-weight:700}
-.tag{font-size:12px;color:var(--mut);font-weight:400}
-.in{padding:0 12px 10px}
-.m{border-top:1px solid var(--line)}
-.m>summary{font-weight:600;font-size:15px}
+.ph>summary{font:600 18px/1.3 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.tag{font:400 12px/1.4 system-ui,sans-serif;color:var(--mut)}
+.in{padding:0 14px 10px}
+.m{border:0;border-top:1px solid var(--line);border-radius:0;margin:0;background:none}
+.m>summary{font-weight:600;font-size:15px;padding:12px 4px}
 .m.cur>summary{color:var(--acc)}
-.t{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:15px}
-.t input{width:22px;height:22px;margin-top:1px;accent-color:var(--acc);flex:none}
-.t.done span{color:var(--mut);text-decoration:line-through}
+.t{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:15px;cursor:pointer}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:0;border:2px solid var(--mut);border-radius:8px;flex:none;display:grid;place-items:center;cursor:pointer;background:transparent;transition:background .18s,border-color .18s,transform .18s}
+input[type=checkbox]::after{content:"";width:12px;height:7px;border-left:3px solid var(--on);border-bottom:3px solid var(--on);transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .18s cubic-bezier(.3,1.6,.5,1)}
+input[type=checkbox]:checked{background:var(--acc);border-color:var(--acc);transform:scale(1.06)}
+input[type=checkbox]:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+.t.done span,.blk input:checked+span{color:var(--mut)}
+.t.done span{text-decoration:line-through}
 .t.ms span{font-weight:600;color:var(--warn)}
 .t.done.ms span{color:var(--mut)}
 .small{font-size:13px;color:var(--mut)}
-ul{margin:6px 0;padding-left:20px}
-li{margin:3px 0}
-.note{border-left:4px solid var(--warn);padding-left:10px;font-size:14px}
+ul,ol{margin:6px 0;padding-left:20px}
+li{margin:4px 0}
+.note{border-left:4px solid var(--sun);padding-left:12px;font-size:14px;border-radius:4px}
 .hide{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{position:relative;padding:12px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:16px;cursor:pointer;transition:transform .12s,background .2s,border-color .2s}
+.chip.on{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:600}
+.chip.rec::after{content:"";position:absolute;top:5px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--sun)}
+.hero{background:var(--hero);color:#fff;border-radius:22px;padding:20px 18px 18px;margin:0 0 14px}
+.hello{font:600 26px/1.15 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.hline{opacity:.8;font-size:14px;margin:4px 0 6px}
+.ruler{width:100%;height:auto;display:block;margin:6px 0 0;overflow:visible}
+.ruler .tr{stroke:rgba(255,255,255,.22);stroke-width:4;stroke-linecap:round}
+.ruler .tk{stroke:rgba(255,255,255,.4);stroke-width:1.2}
+.ruler .tl{fill:rgba(255,255,255,.7);font-size:10px}
+.ruler .fl{fill:var(--sun);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.ruler .mk{transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.ruler .mc{fill:var(--sun);stroke:#fff;stroke-width:2}
+.ruler .gl{stroke:#fff;stroke-width:1.6}
+.ruler .gf{fill:#fff}
+.ruler .gt{fill:#fff;font-size:10px;font-weight:700}
+.cap{font-size:13px;opacity:.78;margin:2px 0 4px}
+.go{width:100%;margin-top:12px;padding:16px;border:0;border-radius:999px;background:var(--sun);color:#1b1500;font-family:inherit;font-weight:700;font-size:17px;line-height:1;cursor:pointer;transition:transform .12s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:2px 0 14px}
+.stats div{padding:4px 8px;text-align:center;border-left:1px solid var(--line)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font:600 34px/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--mut)}
+.wk{margin:0 0 6px}
+.sched{margin:8px 0 14px;font-size:14px}
+.ok{color:var(--good);font-weight:600}
+.bad{color:var(--warn);font-weight:600}
+.tcard{text-align:center}
+.ring{position:relative;width:210px;height:210px;margin:4px auto 6px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .rb{fill:none;stroke:var(--ring);stroke-width:9}
+.ring .rf{fill:none;stroke:var(--acc);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+.tin{position:absolute;inset:0;display:grid;place-content:center}
+.timer{font:600 44px/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-variant-numeric:tabular-nums}
+.blk{border-radius:12px;padding-left:8px;padding-right:8px;margin:0 -8px;transition:background .3s}
+.blk.now{background:var(--acc2)}
+.err{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.err.rv span.tx{color:var(--mut);text-decoration:line-through}
+.x{margin-left:auto;border:0;background:none;color:var(--mut);font-size:22px;cursor:pointer}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:20;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>IELTS 7.5 за 18 месяцев</h1>
-<p class="sub">Из B1 до 7.5 · около 950 часов · 10–15 часов в неделю</p>
+<div class="top"><div><h1>IELTS 7.5</h1><p class="sub" id="hd"></p></div><button class="thb" id="th" aria-label="Тема оформления"></button></div>
 
 <div class="tabs" id="tabs">
-<button data-t="track" class="on">Трекер</button>
+<button data-t="today" class="on">Сегодня</button>
+<button data-t="track">План</button>
+<button data-t="log">Журнал</button>
 <button data-t="rhythm">Режим</button>
 <button data-t="src">Источники</button>
 <button data-t="sync">Синхр.</button>
 </div>
 
-<section id="track">
+<section id="today"></section>
+
+<section id="track" class="hide">
 <div class="card">
 <div class="row"><b>Выполнено задач</b><span id="pt">0%</span></div>
 <div class="bar"><i id="pb"></i></div>
 <div class="row" style="margin-top:12px"><b>Часы занятий</b><span id="ht">0 / 950</span></div>
 <div class="bar"><i id="hb"></i></div>
 <div class="btns">
-<button class="btn solid" data-h="0.5">+0.5 ч</button>
-<button class="btn" data-h="1">+1 ч</button>
-<button class="btn" data-h="2">+2 ч</button>
-<button class="btn" data-h="-0.5">−0.5 ч</button>
+<button class="btn solid" data-h="30">+0.5 ч</button>
+<button class="btn" data-h="60">+1 ч</button>
+<button class="btn" data-h="120">+2 ч</button>
+<button class="btn" data-h="-30">−0.5 ч</button>
 </div>
-<div class="row" style="margin-top:12px"><span>Старт плана</span><input type="date" id="start"></div>
-<div class="small" id="now"></div>
 </div>
-<div id="plan"></div>
+<div class="card">
+<h2>Срок обучения</h2>
+<div class="row"><span>Срок, месяцев</span><select id="mon"></select></div>
+<div class="row"><span>Старт плана</span><input type="date" id="start"></div>
+<p class="small" id="now"></p>
+<p class="small" id="load"></p>
+</div>
+<div id="pl"></div>
 <p class="small">Отметки и часы хранятся на этом устройстве. Чтобы они совпадали на телефоне и ПК, настройте вкладку «Синхр.».</p>
 </section>
 
+<section id="log" class="hide"></section>
+
 <section id="rhythm" class="hide">
-<div class="card note">Честно: путь B1 → 7.5 в среднем требует 900–1200 часов осмысленной практики. 18 месяцев по 10–15 часов в неделю — это реально, но только при регулярности. Пропуск недели лучше компенсировать короткими занятиями, чем «наверстывать» в выходные.</div>
+<div class="card note">Честно: путь B1 → 7.5 в среднем требует 900–1200 часов осмысленной практики. При сроке 18 месяцев это 10–15 часов в неделю. Если срок короче, нагрузка в приложении пересчитывается автоматически. Пропуск недели лучше компенсировать короткими занятиями, чем «наверстывать» в выходные.</div>
 <div class="card">
-<h2>Часов в неделю по фазам</h2>
+<h2>Часов в неделю по фазам (при сроке 18 месяцев)</h2>
 <table>
 <tr><th>Навык</th><th class="n">Ф1</th><th class="n">Ф2</th><th class="n">Ф3</th><th class="n">Ф4</th></tr>
 <tr><td>Грамматика</td><td class="n">2.5</td><td class="n">1.5</td><td class="n">1</td><td class="n">—</td></tr>
@@ -98,24 +171,14 @@ li{margin:3px 0}
 </table>
 </div>
 <div class="card">
-<h2>Как выглядит неделя</h2>
-<ul>
-<li><b>Пн–Пт: 1.5–2 ч в день.</b> Одно «тяжёлое» занятие (грамматика или writing, 45–60 мин) + одно лёгкое (listening, чтение, Anki).</li>
-<li><b>Суббота: 2–3 ч.</b> Речь с репетитором или записью себя + проверка письменных работ.</li>
-<li><b>Воскресенье: 2–3 ч.</b> Таймированный тест или его часть, затем разбор ошибок. Это самое важное занятие недели.</li>
-<li><b>Каждый день, 15 минут:</b> Anki (повторение слов). Не пропускайте, иначе очередь вырастет.</li>
-</ul>
-</div>
-<div class="card">
 <h2>Методы, которые дают результат</h2>
 <ul>
-<li><b>Журнал ошибок.</b> Каждая ошибка из тестов и эссе — в таблицу: что, почему, правильный вариант. Раз в неделю перечитывать.</li>
+<li><b>Журнал ошибок.</b> Каждая ошибка из тестов и эссе — в журнал: что не получилось и как правильно. Раз в неделю перечитывать.</li>
 <li><b>Диктант (Listening).</b> Короткий отрывок 1–2 мин: слушаете, пишете, сверяете с транскриптом. Затем shadowing — повтор вслух вместе с диктором.</li>
-<li><b>Интервальные повторения.</b> 8–10 новых слов в день в Anki, только с примером предложения и коллокациями, а не одиночные слова.</li>
-<li><b>Запись речи.</b> Отвечаете на вопрос Part 2 на 2 минуты, записываете, слушаете, переписываете слабые фразы, записываете снова.</li>
+<li><b>Интервальные повторения.</b> 8–10 новых слов в день в Anki, только с примером предложения и коллокациями.</li>
+<li><b>Запись речи.</b> Ответ на Part 2 на 2 минуты, запись, прослушивание, повтор.</li>
 <li><b>Writing с обратной связью.</b> Эссе без проверки почти не растёт. Нужен репетитор или Write &amp; Improve, плюс переписывание по замечаниям.</li>
 <li><b>Тесты по таймеру.</b> С фазы 2 всегда с таймером и без пауз; целиком — раз в неделю в фазе 4.</li>
-<li><b>Метод «разобрать, потом перепройти».</b> После теста выяснить, почему ответ неверный, и только потом идти дальше.</li>
 </ul>
 </div>
 </section>
@@ -124,64 +187,47 @@ li{margin:3px 0}
 <div class="card">
 <h2>Основные материалы</h2>
 <ul>
-<li><b>Cambridge IELTS 10–19</b> (официальные тесты) — главный источник для проверки уровня и тренировок. Начинать с 10–13, свежие 17–19 оставить на фазу 4.</li>
-<li><b>The Official Cambridge Guide to IELTS</b> — формат, стратегии, задания по каждому навыку.</li>
+<li><b>Cambridge IELTS 10–19</b> (официальные тесты). Начинать с 10–13, свежие 17–19 оставить на фазу 4.</li>
+<li><b>The Official Cambridge Guide to IELTS</b> — формат, стратегии, задания.</li>
 <li><b>Британский совет и IDP</b> — бесплатные пробные материалы и информация о регистрации.</li>
 </ul>
 </div>
 <div class="card">
-<h2>Грамматика</h2>
+<h2>Грамматика и словарь</h2>
 <ul>
 <li>Murphy, <i>English Grammar in Use</i> (Intermediate) → <i>Advanced Grammar in Use</i>.</li>
-<li>Cambridge Dictionary (онлайн) для проверки примеров.</li>
-</ul>
-<h2>Словарь</h2>
-<ul>
 <li><i>English Vocabulary in Use</i>: Pre-intermediate → Intermediate → Upper-intermediate → Advanced.</li>
 <li><i>Academic Vocabulary in Use</i> и <i>Collins Vocabulary for IELTS</i> для фазы 3.</li>
-<li>Anki — карточки с примерами предложений.</li>
+<li>Anki — карточки с примерами предложений. Cambridge Dictionary онлайн.</li>
 </ul>
 </div>
 <div class="card">
-<h2>Listening</h2>
+<h2>Listening и Reading</h2>
 <ul>
-<li>BBC Learning English: 6 Minute English (фаза 1–2).</li>
-<li>TED и TED-Ed с транскриптами; подкасты BBC и ABC (Australia) для разных акцентов.</li>
-<li>Тесты Cambridge IELTS — секции 1–4.</li>
-</ul>
-<h2>Reading</h2>
-<ul>
-<li>Фаза 1: graded readers уровня B1–B2, BBC News Learning English.</li>
-<li>Фаза 2–3: BBC News, The Guardian, The Economist, Scientific American, Aeon.</li>
-<li>Тесты Cambridge IELTS по таймеру.</li>
+<li>BBC Learning English: 6 Minute English; TED и TED-Ed с транскриптами; подкасты BBC и ABC (Australia).</li>
+<li>Фаза 1: graded readers B1–B2, BBC News Learning English. Фаза 2–3: BBC News, The Guardian, The Economist, Scientific American, Aeon.</li>
 </ul>
 </div>
 <div class="card">
-<h2>Speaking</h2>
+<h2>Speaking и Writing</h2>
 <ul>
 <li>Репетитор на italki или Preply: 1 раз в неделю в фазе 1–2, 1–2 раза в неделю в фазе 3–4.</li>
-<li>Запись на телефон (самопроверка), приложение ELSA Speak для произношения.</li>
-<li>Банки вопросов Part 1–3 из Cambridge IELTS и открытые подборки тем.</li>
-</ul>
-<h2>Writing</h2>
-<ul>
-<li>Write &amp; Improve (Cambridge) — бесплатная обратная связь по уровню.</li>
-<li>Репетитор или преподаватель IELTS для оценки по четырём критериям.</li>
+<li>Запись на телефон, ELSA Speak для произношения.</li>
+<li>Write &amp; Improve (Cambridge) — бесплатная обратная связь по письму.</li>
 <li>Разборы эссе band 7+ на ielts-simon.com и ieltsliz.com.</li>
 </ul>
 <p class="small">Названия сайтов и книг проверьте перед покупкой: ссылки и издания меняются.</p>
 </div>
 </section>
-</div>
 
 <section id="sync" class="hide">
 <div class="card">
 <h2>Синхронизация телефон ↔ ПК</h2>
-<p class="small">Отметки и часы отправляются в вашу личную базу Firebase (бесплатно) и подтягиваются на других устройствах. Один и тот же адрес и код нужно ввести на каждом устройстве.</p>
+<p class="small">Отметки, часы, заметки и журнал ошибок отправляются в вашу личную базу Firebase (бесплатно) и подтягиваются на других устройствах. Один и тот же адрес и код нужно ввести на каждом устройстве.</p>
 <div class="row"><span>Адрес базы</span></div>
-<input type="url" id="fbu" placeholder="https://имя-default-rtdb.…firebasedatabase.app" style="width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit">
+<input type="url" id="fbu" class="full" placeholder="https://имя-default-rtdb.…firebasedatabase.app">
 <div class="row" style="margin-top:10px"><span>Код синхронизации</span></div>
-<input type="text" id="fbc" placeholder="длинный секретный код" style="width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit">
+<input type="text" id="fbc" class="full" placeholder="длинный секретный код">
 <div class="btns">
 <button class="btn" id="gen">Создать код</button>
 <button class="btn solid" id="syncnow">Синхронизировать</button>
@@ -198,10 +244,12 @@ li{margin:3px 0}
 <li>Нажмите «Создать код», затем «Синхронизировать». Адрес и код введите так же на втором устройстве.</li>
 </ol>
 <pre style="white-space:pre-wrap;background:var(--acc2);padding:10px;border-radius:8px;font-size:13px">{"rules":{"ielts":{"$code":{".read":true,".write":true}}}}</pre>
-<p class="small">Данные доступны только тому, кто знает ваш код, поэтому не показывайте его другим. Внутри только галочки и число часов.</p>
+<p class="small">Данные доступны только тому, кто знает ваш код, поэтому не показывайте его другим.</p>
 </div>
 </section>
+</div>
 
+<div id="toast" role="status"></div>
 <script>
 var PHASES=[
 {n:"Фаза 1 · Фундамент (B1 → B2)",tag:"месяцы 1–5 · цель 5.5–6.0 · 10.5 ч/нед",hrs:226,m:[
@@ -231,63 +279,118 @@ var PHASES=[
 ["Резерв",["Получить результат и сравнить с целью","Если ниже цели: найти слабую часть и 6–8 недель точечной подготовки","Пересдача (при необходимости)","Отпраздновать результат"]]
 ]}
 ];
-var KEY="ielts-plan-v2",SK="ielts-sync-cfg";
-var S={done:{},un:{},hours:0,hTs:0,start:"",sTs:0};
-var C={fb:"",code:""};
+var KEY="ielts-plan-v2",SK="ielts-sync-cfg",SSK="ielts-sess";
+var S={done:{},un:{},hours:0,hTs:0,start:"",sTs:0,months:18,mTs:0,log:{},notes:{},errs:{}};
+var C={fb:"",code:"",rem:{on:false,time:"19:00"}};
+var SS=null;
+function $(i){return document.getElementById(i)}
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function pad(n){return (n<10?"0":"")+n}
+function dk(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function fmtD(d){return d.toLocaleDateString("ru-RU",{day:"numeric",month:"long"})}
+function fmtM(d){return d.toLocaleDateString("ru-RU",{month:"short",year:"numeric"})}
 try{var raw=localStorage.getItem(KEY)||localStorage.getItem("ielts-plan-v1");if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
-try{var c=localStorage.getItem(SK);if(c)C=Object.assign(C,JSON.parse(c))}catch(e){}
-if(!S.un)S.un={};
+try{var c=localStorage.getItem(SK);if(c){var oc=JSON.parse(c);for(var k2 in oc)C[k2]=oc[k2]}}catch(e){}
+try{var s2=localStorage.getItem(SSK);if(s2)SS=JSON.parse(s2)}catch(e){}
+["un","log","notes","errs"].forEach(function(f){if(!S[f])S[f]={}});
+if(!S.months)S.months=18;
+if(!C.rem)C.rem={on:false,time:"19:00"};
+if(!S.start){var d0=new Date(),kk=(8-d0.getDay())%7||7;d0.setDate(d0.getDate()+kk);S.start=dk(d0)}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function saveC(){try{localStorage.setItem(SK,JSON.stringify(C))}catch(e){}}
+function saveSS(){try{if(SS)localStorage.setItem(SSK,JSON.stringify(SS));else localStorage.removeItem(SSK)}catch(e){}}
 function isDone(id){return (S.done[id]||0)>(S.un[id]||0)}
 function setDone(id,v){var t=Date.now();if(v)S.done[id]=t;else S.un[id]=t;save();push()}
-if(!S.start){var d=new Date(),k=(8-d.getDay())%7||7;d.setDate(d.getDate()+k);S.start=d.toISOString().slice(0,10)}
-var timer=null,busy=false;
-function url(){var b=(C.fb||"").trim().replace(/\/+$/,""),cd=(C.code||"").trim();return b&&cd?b+"/ielts/"+encodeURIComponent(cd)+".json":""}
-function msg(t){var e=document.getElementById("sst");if(e)e.textContent=t}
-function pub(){return {done:S.done,un:S.un,hours:S.hours,hTs:S.hTs,start:S.start,sTs:S.sTs}}
-function mergeIn(R){
- var ch=false;if(!R)return ch;
- ["done","un"].forEach(function(f){var r=R[f]||{};for(var k in r){if(!((S[f][k]||0)>=r[k])){S[f][k]=r[k];ch=true}}});
- if((R.hTs||0)>(S.hTs||0)){S.hours=R.hours||0;S.hTs=R.hTs;ch=true}
- if((R.sTs||0)>(S.sTs||0)&&R.start){S.start=R.start;S.sTs=R.sTs;ch=true}
- return ch;
+
+/* ---------- plan math ---------- */
+var BASE=[10.5,12,13.5,14.5],TARGET=["5.5–6.0","6.5","7.0–7.5","7.5"],RANGE=["1–5","6–10","11–15","16–18"];
+var SH=[{gr:2.5,vo:2,li:2,re:1.5,sp:1.5,wr:1},{gr:1.5,vo:1.5,li:2.5,re:2.5,sp:2,wr:2},{gr:1,vo:1.5,li:2.5,re:2.5,sp:2.5,wr:3.5},{mk:4,er:2,li:2,re:2,sp:2,wr:2.5}];
+var NAME={gr:"Грамматика",vo:"Слова",li:"Listening",re:"Reading",sp:"Speaking",wr:"Writing",mk:"Пробный тест",er:"Разбор ошибок"};
+var TXT={
+ gr:["Murphy Intermediate: 1–2 юнита и упражнения","Advanced Grammar in Use: 1 юнит, затем свои примеры","Сложные предложения и разбор своих ошибок","Повторить слабые темы по журналу ошибок"],
+ vo:["Anki: очередь повторений и 8 новых слов с примерами","Anki и Vocabulary in Use: 1 юнит, коллокации","Academic Vocabulary: слова из чтения, перефразирование","Anki: очередь повторений"],
+ li:["Диктант 1–2 минуты и shadowing (6 Minute English)","Секция Cambridge IELTS по таймеру и разбор","Полная секция по таймеру, разные акценты","Секция Listening по таймеру и разбор"],
+ re:["Статья B1–B2, незнакомые слова в Anki","Один текст Cambridge по таймеру (20 минут)","Академическая статья и задания по таймеру","Один-два текста по таймеру"],
+ sp:["Записать голос на 5 минут и переслушать","Part 2 на 2 минуты: запись и разбор; Part 1 и 3","Вопросы Part 1–3, развёрнутые ответы","Мини-интервью, запись и разбор"],
+ wr:["Абзац 80–100 слов (Write & Improve)","Task 1 или Task 2, затем проверка","Эссе Task 2 за 40 минут, переписать по замечаниям","Task 1 или 2 по таймеру"],
+ mk:["","","","Полный пробный тест или его часть в условиях экзамена"],
+ er:["Перечитать журнал ошибок и исправить","Перечитать журнал ошибок и исправить","Перечитать журнал ошибок и исправить","Разобрать ошибки теста и обновить журнал"]
+};
+function N(){return S.months||18}
+function startD(){return new Date(S.start+"T00:00:00")}
+function spanDays(){return N()*30.4375}
+function elapsedDays(){return (Date.now()-startD().getTime())/864e5}
+function stageNow(){var d=elapsedDays();if(d<0)return 1;return Math.min(18,Math.floor(d/(spanDays()/18))+1)}
+function phaseOf(st){return st<=5?0:st<=10?1:st<=15?2:3}
+function weeklyH(ph){return BASE[ph]*18/N()}
+function stageStart(k){return new Date(startD().getTime()+(k-1)*spanDays()/18*864e5)}
+function examD(){return new Date(startD().getTime()+spanDays()*864e5)}
+function recMin(ph){var m=Math.round(weeklyH(ph)*60/6/5)*5;return Math.max(30,Math.min(240,m))}
+function totalMin(){var s=0;for(var d in S.log)s+=S.log[d].m||0;return s}
+function totalHours(){return (S.hours||0)+totalMin()/60}
+function addMin(min,date){
+ date=date||dk(new Date());var L=S.log[date]||{m:0,t:0};
+ L.m=Math.max(0,L.m+min);L.t=Date.now();S.log[date]=L;save();push();
 }
-function applyChecks(){
- document.querySelectorAll(".t input").forEach(function(cb){var v=isDone(cb.dataset.id);cb.checked=v;cb.parentNode.classList.toggle("done",v)});
- document.getElementById("start").value=S.start;stats();where();
+function weekStart(){var d=new Date();d.setHours(0,0,0,0);var w=(d.getDay()+6)%7;d.setDate(d.getDate()-w);return d}
+function weekMin(){var s=weekStart(),sum=0;for(var i=0;i<7;i++){var d=new Date(s);d.setDate(s.getDate()+i);var L=S.log[dk(d)];if(L)sum+=L.m||0}return sum}
+function streak(){
+ var d=new Date(),n=0;d.setHours(0,0,0,0);
+ var L=S.log[dk(d)];
+ if(!(L&&L.m>=10))d.setDate(d.getDate()-1);
+ while(true){var x=S.log[dk(d)];if(x&&x.m>=10){n++;d.setDate(d.getDate()-1)}else break}
+ return n;
 }
-function sync(manual){
- var u=url();
- if(!u){if(manual)msg("Укажите адрес базы и код.");return}
- if(busy)return;busy=true;msg("Синхронизация…");
- fetch(u).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(R){
-  var ch=mergeIn(R);save();if(ch)applyChecks();
-  return fetch(u,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(pub())});
- }).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);busy=false;msg("Синхронизировано в "+new Date().toLocaleTimeString("ru-RU"))})
- .catch(function(e){busy=false;msg("Ошибка: "+e.message+". Проверьте адрес, правила и интернет.")});
+function taskCounts(){var n=0,t=0;PHASES.forEach(function(p,pi){p.m.forEach(function(m,mj){m[1].forEach(function(x,ti){t++;if(isDone(pi+"-"+mj+"-"+ti))n++})})});return [n,t]}
+var STG=[];PHASES.forEach(function(p,pi){p.m.forEach(function(m,mj){STG.push({pi:pi,mj:mj,name:m[0],tasks:m[1]})})});
+
+/* ---------- day plan ---------- */
+function makeBlocks(M,ph,dow,dnum){
+ M=Math.max(15,Math.round(M/5)*5);
+ var w={},sh=SH[ph],sum=0,k;
+ for(k in sh)w[k]=sh[k];
+ if(dow===6){if(w.sp)w.sp*=1.6;if(w.wr)w.wr*=1.6}
+ if(dow===0){if(w.li)w.li*=1.5;if(w.re)w.re*=1.5;if(!w.er)w.er=1.5}
+ var keys=Object.keys(w);
+ keys.forEach(function(k,i){w[k]*=0.85+0.3*(((dnum*7+i*13)%10)/9)});
+ keys.sort(function(a,b){return w[b]-w[a]});
+ var n=Math.max(1,Math.min(keys.length,Math.floor(M/10)));
+ keys=keys.slice(0,n);
+ sum=0;keys.forEach(function(k){sum+=w[k]});
+ var mins={},tot=0;
+ keys.forEach(function(k){var m=Math.max(10,Math.round(M*w[k]/sum/5)*5);mins[k]=m;tot+=m});
+ var guard=0;
+ while(tot!==M&&guard++<200){
+  var big=keys[0];
+  keys.forEach(function(k){if(mins[k]>mins[big])big=k});
+  var small=keys[0];keys.forEach(function(k){if(mins[k]<mins[small])small=k});
+  if(tot>M){if(mins[big]-5>=10){mins[big]-=5;tot-=5}else break}
+  else{mins[small]+=5;tot+=5}
+ }
+ return keys.map(function(k){return {k:k,m:mins[k],tx:TXT[k][ph]}});
 }
-function push(){if(!url())return;clearTimeout(timer);timer=setTimeout(function(){sync(false)},1500)}
-var total=0,mi=0,plan=document.getElementById("plan");
+
+/* ---------- plan tab ---------- */
+var plan=$("pl"),mi=0,totalTasks=0;
 function build(){
- plan.innerHTML="";total=0;mi=0;
+ plan.innerHTML="";mi=0;totalTasks=0;
+ var cur=stageNow();
  PHASES.forEach(function(p,pi){
-  var det=document.createElement("details");det.className="ph";det.open=pi===0;
-  var cnt=0;p.m.forEach(function(m){cnt+=m[1].length});
-  det.innerHTML='<summary><span>'+p.n+'<br><span class="tag">'+p.tag+'</span></span><span class="tag" id="pc'+pi+'"></span></summary>';
+  var det=document.createElement("details");det.className="ph";det.open=(pi===phaseOf(cur));
+  det.innerHTML='<summary><span>'+p.n+'<br><span class="tag">этапы '+RANGE[pi]+' · цель '+TARGET[pi]+' · ≈'+(Math.round(weeklyH(pi)*10)/10)+' ч/нед</span></span><span class="tag" id="pc'+pi+'"></span></summary>';
   var inn=document.createElement("div");inn.className="in";
   p.m.forEach(function(m,mj){
    mi++;var num=mi;
-   var md=document.createElement("details");md.className="m";md.dataset.m=num;
-   md.innerHTML='<summary><span>Месяц '+num+': '+m[0]+'</span><span class="tag" id="mc'+num+'"></span></summary>';
+   var md=document.createElement("details");md.className="m"+(num===cur?" cur":"");md.dataset.m=num;
+   if(num===cur)md.open=true;
+   md.innerHTML='<summary><span>Этап '+num+': '+m[0]+'<br><span class="tag">с '+fmtM(stageStart(num))+'</span></span><span class="tag" id="mc'+num+'"></span></summary>';
    var box=document.createElement("div");box.className="in";
    m[1].forEach(function(t,ti){
-    total++;
+    totalTasks++;
     var id=pi+"-"+mj+"-"+ti;
-    var ms=(ti===m[1].length-1&&m[2]!==undefined&&0)||(m[2]&&ti===m[1].length-1)||(m[3]);
     var lab=document.createElement("label");lab.className="t"+(ti===m[1].length-1&&(mj===p.m.length-1||m[2])?" ms":"");
     var cb=document.createElement("input");cb.type="checkbox";cb.checked=isDone(id);cb.dataset.id=id;
-    cb.addEventListener("change",function(){setDone(id,cb.checked);lab.classList.toggle("done",cb.checked);stats()});
+    cb.addEventListener("change",function(){setDone(id,cb.checked);lab.classList.toggle("done",cb.checked);stats();renderToday()});
     var sp=document.createElement("span");sp.textContent=t;
     if(cb.checked)lab.classList.add("done");
     lab.appendChild(cb);lab.appendChild(sp);box.appendChild(lab);
@@ -297,52 +400,323 @@ function build(){
   det.appendChild(inn);plan.appendChild(det);
  });
 }
+function applyChecks(){
+ document.querySelectorAll("#pl .t input").forEach(function(cb){var v=isDone(cb.dataset.id);cb.checked=v;cb.parentNode.classList.toggle("done",v)});
+}
+function schedule(){
+ var tc=taskCounts(),frac=Math.max(0,Math.min(1,elapsedDays()/spanDays()));
+ var exp=frac*tc[1],diff=tc[0]-exp;
+ if(elapsedDays()<0)return {t:"План начнётся "+fmtD(startD()),c:""};
+ if(diff>=3)return {t:"Опережаете график на ≈"+Math.round(diff)+" задач",c:"ok"};
+ if(diff<=-3)return {t:"Отстаёте от графика на ≈"+Math.round(-diff)+" задач",c:"bad"};
+ return {t:"Идёте по графику",c:"ok"};
+}
 function stats(){
- var n=Object.keys(S.done).filter(isDone).length,pc=total?Math.round(n/total*100):0;
- document.getElementById("pt").textContent=n+" / "+total+" · "+pc+"%";
- document.getElementById("pb").style.width=pc+"%";
- var h=Math.max(0,S.hours),hp=Math.min(100,h/950*100);
- document.getElementById("ht").textContent=(Math.round(h*10)/10)+" / 950";
- document.getElementById("hb").style.width=hp+"%";
- var m=0;
+ var tc=taskCounts(),n=tc[0],tt=tc[1],pc=tt?Math.round(n/tt*100):0;
+ $("pt").textContent=n+" / "+tt+" · "+pc+"%";$("pb").style.width=pc+"%";
+ var h=totalHours();
+ $("ht").textContent=(Math.round(h*10)/10)+" / 950";$("hb").style.width=Math.min(100,h/950*100)+"%";
  PHASES.forEach(function(p,pi){
   var pd=0,pt=0;
-  p.m.forEach(function(mm,mj){m++;var md=0;mm[1].forEach(function(t,ti){pt++;if(isDone(pi+"-"+mj+"-"+ti)){pd++;md++}});
-   var el=document.getElementById("mc"+m);if(el)el.textContent=md+"/"+mm[1].length});
-  var pe=document.getElementById("pc"+pi);if(pe)pe.textContent=pd+"/"+pt;
+  p.m.forEach(function(mm,mj){var md=0;mm[1].forEach(function(t,ti){pt++;if(isDone(pi+"-"+mj+"-"+ti)){pd++;md++}});
+   var idx=0;for(var q=0;q<pi;q++)idx+=PHASES[q].m.length;idx+=mj+1;
+   var el=$("mc"+idx);if(el)el.textContent=md+"/"+mm[1].length});
+  var pe=$("pc"+pi);if(pe)pe.textContent=pd+"/"+pt;
  });
+ var st=stageNow(),ph=phaseOf(st),w=weeklyH(ph);
+ $("now").textContent="Экзамен ориентировочно: "+fmtD(examD())+" "+examD().getFullYear()+(elapsedDays()>=0?". Сейчас этап "+st+" из 18.":"");
+ $("load").textContent="Нагрузка сейчас: ≈"+(Math.round(w*10)/10)+" ч в неделю, это около "+recMin(ph)+" мин в день при 6 днях занятий."+(w>20?" Это очень много, подумайте о более длинном сроке.":"");
+ $("hd").textContent="Этап "+st+" из 18 · цель на этом этапе: "+TARGET[ph];
 }
-function where(){
- var s=new Date(S.start+"T00:00:00"),now=new Date();
- var el=document.getElementById("now");
- var w=Math.floor((now-s)/6048e5)+1;
- if(isNaN(w)){el.textContent="";return}
- if(w<1){el.textContent="План начнётся "+s.toLocaleDateString("ru-RU")+". До старта: "+(1-w)+" нед.";return}
- var mo=Math.min(18,Math.floor((w-1)/4.33)+1);
- el.textContent="Сейчас неделя "+w+" из ~78 · месяц "+mo;
- var cur=document.querySelector('details.m[data-m="'+mo+'"]');
- if(cur){cur.classList.add("cur")}
+
+/* ---------- today tab ---------- */
+var mode="home",pickMin=null;
+var TV=[5.75,6.5,7.25,7.5];
+function plural(n,a1,a2,a5){var m=n%100,k=n%10;if(m>10&&m<20)return a5;if(k===1)return a1;if(k>=2&&k<=4)return a2;return a5}
+function ruler(){
+ var frac=Math.max(0,Math.min(1,elapsedDays()/spanDays())),lvl=4.5+3*frac;
+ function X(b){return 10+(b-4)*70}
+ var ticks="",lab="";
+ for(var b=4;b<=8;b+=0.5){var x=X(b),big=(b%1===0);ticks+='<line x1="'+x+'" x2="'+x+'" y1="'+(big?25:28)+'" y2="38" class="tk"/>';if(big)lab+='<text x="'+x+'" y="54" class="tl" text-anchor="middle">'+b+'</text>'}
+ return '<svg class="ruler" viewBox="0 0 300 60" role="img" aria-label="Шкала band score">'
+  +'<line x1="'+X(4)+'" x2="'+X(8)+'" y1="33" y2="33" class="tr"/>'
+  +'<rect x="'+X(4.5)+'" y="31" width="210" height="4" rx="2" class="fl" style="transform-origin:'+X(4.5)+'px 33px;transform:scaleX(0)" data-f="'+((lvl-4.5)/3)+'"/>'
+  +ticks+lab
+  +'<g transform="translate('+X(7.5)+',0)"><line y1="12" y2="33" class="gl"/><path d="M0 12 L16 16.5 L0 21 Z" class="gf"/><text x="-5" y="9" class="gt" text-anchor="end">цель 7.5</text></g>'
+  +'<g class="mk" style="transform:translateX('+X(4.5)+'px)" data-x="'+X(lvl)+'"><circle cy="33" r="7" class="mc"/></g></svg>';
 }
-document.querySelectorAll("[data-h]").forEach(function(b){b.addEventListener("click",function(){S.hours=Math.max(0,S.hours+parseFloat(b.dataset.h));S.hTs=Date.now();save();stats();push()})});
-var st=document.getElementById("start");st.value=S.start;
-st.addEventListener("change",function(){S.start=st.value;S.sTs=Date.now();save();push();document.querySelectorAll("details.m.cur").forEach(function(e){e.classList.remove("cur")});where()});
-document.querySelectorAll("#tabs button").forEach(function(b){b.addEventListener("click",function(){
- document.querySelectorAll("#tabs button").forEach(function(x){x.classList.toggle("on",x===b)});
- ["track","rhythm","src","sync"].forEach(function(id){document.getElementById(id).classList.toggle("hide",id!==b.dataset.t)});
+function setBars(anim){
+ function go(){
+  document.querySelectorAll("#today .bar i[data-w]").forEach(function(i){i.style.width=i.dataset.w+"%"});
+  document.querySelectorAll("#today .ruler .fl").forEach(function(r){r.style.transform="scaleX("+r.dataset.f+")"});
+  document.querySelectorAll("#today .ruler .mk").forEach(function(g){g.style.transform="translateX("+g.dataset.x+"px)"});
+ }
+ if(anim){requestAnimationFrame(function(){requestAnimationFrame(go)})}else go();
+}
+var toastT=null;
+function toast(t){var e=$("toast");e.textContent=t;e.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){e.classList.remove("show")},2600)}
+var lastMode=null;
+
+function elapsedSec(){return SS?(SS.acc||0)+(SS.since?(Date.now()-SS.since)/1000:0):0}
+function fmtT(s){s=Math.max(0,Math.round(s));return pad(Math.floor(s/60))+":"+pad(s%60)}
+function openTasks(st,limit){
+ var s=STG[st-1],out=[];
+ s.tasks.forEach(function(t,ti){var id=s.pi+"-"+s.mj+"-"+ti;if(!isDone(id)&&out.length<limit)out.push({id:id,t:t})});
+ return out;
+}
+function renderToday(){
+ var el=$("today"),now=new Date(),t=dk(now),st=stageNow(),ph=phaseOf(st);
+ if(SS&&SS.date!==t){SS=null;saveSS()}
+ if(SS)mode=SS.fin?"finish":"active";else if(mode==="active"||mode==="finish")mode="home";
+ var h="";
+ if(mode==="home"){
+  var dm=(S.log[t]||{}).m||0,wm=weekMin(),wg=Math.round(weeklyH(ph)*60),sc=schedule(),sk=streak();
+  var left=Math.ceil((examD().getTime()-Date.now())/864e5);
+  var hr=now.getHours(),hello=hr<5?"Доброй ночи":hr<12?"Доброе утро":hr<18?"Добрый день":"Добрый вечер";
+  var fr=Math.max(0,Math.min(1,elapsedDays()/spanDays())),lv=Math.round((4.5+3*fr)*10)/10;
+  h+='<div class="hero"><div class="hello">'+hello+'</div>';
+  h+='<div class="hline">Этап '+st+' из 18, цель этапа '+TARGET[ph]+'</div>'+ruler();
+  h+='<div class="cap">'+(elapsedDays()>=0?'По плану сегодня около '+lv:'План начнётся '+esc(fmtD(startD())))+'</div>';
+  h+='<button class="go" data-a="begin">'+(dm?'Ещё одно занятие':'Начать занятие')+'</button></div>';
+  h+='<div class="stats"><div><b>'+sk+'</b><span>'+plural(sk,'день','дня','дней')+' подряд</span></div><div><b>'+dm+'</b><span>мин сегодня</span></div><div><b>'+(left>0?left:0)+'</b><span>'+plural(Math.max(left,0),'день','дня','дней')+' до экзамена</span></div></div>';
+  h+='<div class="wk"><div class="row"><span>Эта неделя</span><b>'+(Math.round(wm/6)/10)+' из '+(Math.round(wg/6)/10)+' ч</b></div><div class="bar"><i style="width:0" data-w="'+Math.min(100,Math.round(wm/wg*100))+'"></i></div></div>';
+  if(elapsedDays()>=0)h+='<p class="sched '+sc.c+'">'+esc(sc.t)+'</p>';
+  var ot=openTasks(st,3);
+  if(ot.length){
+   h+='<div class="card"><h2>Задачи этапа '+st+'</h2>';
+   ot.forEach(function(x){h+='<label class="t"><input type="checkbox" data-t="'+x.id+'"><span>'+esc(x.t)+'</span></label>'});
+   h+='</div>';
+  }
+  var rv=Object.keys(S.errs).filter(function(i){var e=S.errs[i];return !e.del&&!e.rv}).length;
+  if(rv)h+='<div class="card"><b>В журнале ошибок: '+rv+' на повторение</b><div class="btns"><button class="btn" data-a="tolog">Открыть журнал</button></div></div>';
+  h+=remCard();
+ }
+ else if(mode==="pick"){
+  var rc=recMin(ph),opts=[30,45,60,90,120,150,180];
+  if(opts.indexOf(rc)<0)opts.push(rc);
+  opts.sort(function(a,b){return a-b});
+  if(pickMin==null)pickMin=rc;
+  h+='<div class="card"><h2>Сколько учимся сегодня?</h2><div class="chips">';
+  opts.forEach(function(m){h+='<button class="chip'+(m===pickMin?' on':'')+(m===rc?' rec':'')+'" data-m="'+m+'">'+(m>=60&&m%60===0?(m/60)+' ч':m+' мин')+'</button>'});
+  h+='</div><div class="row"><span>Своё время, мин</span><input type="number" id="cm" min="15" max="360" step="5" value="'+pickMin+'" style="width:100px"></div>';
+  h+='<p class="small">Рекомендуем ≈'+rc+' мин: столько нужно в день на этом этапе при сроке '+N()+' мес.</p>';
+  h+='<button class="btn solid big" data-a="make">Составить план</button>';
+  h+='<div class="btns"><button class="btn" data-a="back">Назад</button></div></div>';
+ }
+ else if(mode==="active"){
+  h+='<div class="card tcard"><div class="ring"><svg viewBox="0 0 120 120"><circle class="rb" cx="60" cy="60" r="52"/><circle class="rf" id="rf" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0"/></svg><div class="tin"><div class="small">Осталось</div><div class="timer" id="tm">--:--</div></div></div>';
+  h+='<div class="btns" style="justify-content:center"><button class="btn solid" data-a="tog" id="tg">'+(SS.since?'Пауза':'Старт')+'</button><button class="btn" data-a="reset">Сначала</button></div></div>';
+  h+='<div class="card"><h2>План на '+SS.min+' мин</h2>';
+  SS.blocks.forEach(function(b,i){
+   h+='<label class="t blk" data-i="'+i+'"><input type="checkbox" data-b="'+b.k+'"'+(SS.d[b.k]?' checked':'')+'><span><b>'+esc(NAME[b.k])+' · '+b.m+' мин</b><br><span class="small">'+esc(b.tx)+'</span></span></label>';
+  });
+  h+='</div>';
+  var ot2=openTasks(st,3);
+  if(ot2.length){
+   h+='<div class="card"><h2>Задачи этапа '+st+'</h2>';
+   ot2.forEach(function(x){h+='<label class="t"><input type="checkbox" data-t="'+x.id+'"><span>'+esc(x.t)+'</span></label>'});
+   h+='</div>';
+  }
+  h+='<button class="btn solid big" data-a="finish">Завершить занятие</button>';
+ }
+ else if(mode==="finish"){
+  var el2=Math.round(elapsedSec()/60),dn=0;
+  SS.blocks.forEach(function(b){if(SS.d[b.k])dn+=b.m});
+  var def=el2>=5?el2:dn;
+  h+='<div class="card"><h2>Занятие завершено</h2>';
+  h+='<div class="row"><span>Сколько минут записать</span><input type="number" id="fm" min="0" max="600" value="'+def+'" style="width:100px"></div>';
+  h+='<p class="small">По таймеру: '+el2+' мин, по отмеченным блокам: '+dn+' мин.</p>';
+  h+='<div class="row"><span>Заметка о занятии</span></div><textarea id="fn" placeholder="Что получилось, что нет"></textarea>';
+  h+='<div class="row" style="margin-top:10px"><span>Ошибка или слабое место (в журнал)</span></div>';
+  h+='<select id="fs" class="full">'+skillOpts()+'</select>';
+  h+='<input type="text" id="fe" class="full" style="margin-top:6px" placeholder="Например: путаю Past Perfect и Past Simple">';
+  h+='<button class="btn solid big" data-a="save">Сохранить</button>';
+  h+='<div class="btns"><button class="btn" data-a="cont">Вернуться к занятию</button></div></div>';
+ }
+ var anim=(lastMode!==mode);lastMode=mode;
+ el.innerHTML=h;setBars(anim);updTimer();
+}
+function skillOpts(){var o="";["gr","vo","li","re","sp","wr"].forEach(function(k){o+='<option value="'+k+'">'+NAME[k]+'</option>'});return o}
+function updTimer(){
+ if(mode!=="active"||!SS)return;
+ var rem=SS.min*60-elapsedSec(),tm=$("tm");
+ if(tm)tm.textContent=rem>0?fmtT(rem):"Время вышло";
+ var rf=$("rf");if(rf)rf.style.strokeDashoffset=String(326.7*Math.max(0,Math.min(1,elapsedSec()/(SS.min*60))));
+ var e=elapsedSec()/60,cum=0,idx=-1;
+ SS.blocks.forEach(function(b,i){if(idx<0&&e<cum+b.m)idx=i;cum+=b.m});
+ document.querySelectorAll("#today .blk").forEach(function(n){n.classList.toggle("now",!!SS.since&&Number(n.dataset.i)===idx)});
+ if(rem<=0&&SS.since&&!SS.buzzed){SS.buzzed=true;saveSS();try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e2){}}
+}
+setInterval(updTimer,1000);
+
+$("today").addEventListener("click",function(ev){
+ var tg=ev.target.closest("[data-a],[data-m]");if(!tg)return;
+ var a=tg.dataset.a;
+ if(tg.dataset.m&&!a){pickMin=Number(tg.dataset.m);renderToday();return}
+ if(a==="begin"){mode="pick";pickMin=null;renderToday()}
+ else if(a==="back"){mode="home";renderToday()}
+ else if(a==="tolog"){showTab("log")}
+ else if(a==="make"){
+  var cmv=Number($("cm").value)||pickMin||60;
+  var now=new Date(),st=stageNow(),ph=phaseOf(st),dnum=Math.floor(now.getTime()/864e5);
+  var bl=makeBlocks(cmv,ph,now.getDay(),dnum);
+  var tot=0;bl.forEach(function(b){tot+=b.m});
+  SS={date:dk(now),min:tot,blocks:bl,d:{},acc:0,since:null,fin:false};saveSS();mode="active";renderToday();
+ }
+ else if(a==="tog"){
+  if(SS.since){SS.acc=elapsedSec();SS.since=null}else{SS.since=Date.now()}
+  saveSS();renderToday();
+ }
+ else if(a==="reset"){SS.acc=0;SS.since=null;SS.buzzed=false;saveSS();renderToday()}
+ else if(a==="finish"){SS.acc=elapsedSec();SS.since=null;SS.fin=true;saveSS();mode="finish";renderToday()}
+ else if(a==="cont"){SS.fin=false;saveSS();mode="active";renderToday()}
+ else if(a==="save"){
+  var m=Math.max(0,Math.round(Number($("fm").value)||0)),t=dk(new Date());
+  if(m>0)addMin(m,t);
+  var nt=$("fn").value.trim();
+  if(nt){var pv=S.notes[t]?S.notes[t].tx+"\n":"";S.notes[t]={tx:pv+nt,t:Date.now()}}
+  var et=$("fe").value.trim();
+  if(et)addErr(et,$("fs").value);
+  save();push();SS=null;saveSS();mode="home";stats();renderToday();renderLog();
+  toast(m>0?"Записано "+m+" мин. Серия: "+streak()+" "+plural(streak(),"день","дня","дней"):"Занятие закрыто без записи минут");
+ }
+ else if(a==="rem"){toggleRem()}
+});
+$("today").addEventListener("change",function(ev){
+ var n=ev.target;
+ if(n.dataset.b){SS.d[n.dataset.b]=n.checked;saveSS()}
+ else if(n.dataset.t){setDone(n.dataset.t,n.checked);applyChecks();stats();renderToday()}
+ else if(n.id==="cm"){pickMin=Number(n.value)||pickMin}
+ else if(n.id==="rt"){C.rem.time=n.value||"19:00";saveC();if(C.rem.on)setReminder()}
+});
+
+/* ---------- reminder (Android) ---------- */
+function LN(){try{return window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications}catch(e){return null}}
+function remCard(){
+ var p=LN();
+ if(!p)return '';
+ return '<div class="card"><h2>Напоминание</h2><div class="row"><span>Каждый день в</span><input type="time" id="rt" value="'+esc(C.rem.time)+'"></div><button class="btn'+(C.rem.on?' solid':'')+'" data-a="rem">'+(C.rem.on?'Включено, выключить':'Включить напоминание')+'</button><p class="small" id="rmsg"></p></div>';
+}
+function toggleRem(){C.rem.on=!C.rem.on;saveC();setReminder();renderToday()}
+function setReminder(){
+ var p=LN();if(!p)return;
+ p.cancel({notifications:[{id:1}]}).catch(function(){}).then(function(){
+  if(!C.rem.on)return;
+  return p.requestPermissions().then(function(r){
+   if(r.display!=="granted"){C.rem.on=false;saveC();renderToday();return}
+   var hm=(C.rem.time||"19:00").split(":");
+   return p.schedule({notifications:[{id:1,title:"IELTS 7.5",body:"Пора заниматься. Откройте приложение и нажмите «Начать занятие».",schedule:{on:{hour:Number(hm[0]),minute:Number(hm[1])},allowWhileIdle:true}}]});
+  });
+ }).catch(function(){});
+}
+
+/* ---------- journal tab ---------- */
+function addErr(tx,sk){
+ var id="e"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+ S.errs[id]={tx:tx,sk:sk,d:dk(new Date()),t:Date.now(),rv:0,del:0};save();push();
+}
+function touchErr(id,f){var e=S.errs[id];if(!e)return;f(e);e.t=Date.now();save();push()}
+function renderLog(){
+ var el=$("log"),h="";
+ h+='<div class="card"><h2>Журнал ошибок</h2>';
+ h+='<select id="ls" class="full">'+skillOpts()+'</select>';
+ h+='<input type="text" id="le" class="full" style="margin-top:6px" placeholder="Что не получилось и как правильно">';
+ h+='<div class="btns"><button class="btn solid" data-a="adderr">Добавить</button></div>';
+ var ids=Object.keys(S.errs).filter(function(i){return !S.errs[i].del});
+ ids.sort(function(a,b){var x=S.errs[a],y=S.errs[b];if(!!x.rv!==!!y.rv)return x.rv?1:-1;return y.t-x.t});
+ var lim=Date.now()-60*864e5;
+ ids=ids.filter(function(i){return S.errs[i].t>lim});
+ if(!ids.length)h+='<p class="small">Пока пусто. Записывайте сюда ошибки из тестов и эссе, раз в неделю перечитывайте.</p>';
+ ids.forEach(function(i){
+  var e=S.errs[i];
+  h+='<div class="err'+(e.rv?' rv':'')+'"><input type="checkbox" data-r="'+i+'"'+(e.rv?' checked':'')+'><span class="tx" style="flex:1"><span class="tx">'+esc(e.tx)+'</span><br><span class="small">'+esc(NAME[e.sk]||'')+' · '+esc(e.d)+'</span></span><button class="x" data-del="'+i+'">×</button></div>';
+ });
+ h+='<p class="small">Галочка означает «повторил».</p></div>';
+ h+='<div class="card"><h2>История занятий</h2>';
+ var ds=Object.keys(S.log).filter(function(d){return S.log[d].m>0||S.notes[d]});
+ ds.sort().reverse();ds=ds.slice(0,14);
+ if(!ds.length)h+='<p class="small">Здесь появятся минуты и заметки по дням.</p>';
+ ds.forEach(function(d){
+  var L=S.log[d]||{m:0},nt=S.notes[d];
+  h+='<div class="err"><span style="flex:1"><b>'+esc(d)+'</b> · '+(L.m||0)+' мин'+(nt?'<br><span class="small">'+esc(nt.tx).replace(/\n/g,'<br>')+'</span>':'')+'</span></div>';
+ });
+ h+='</div>';
+ el.innerHTML=h;
+}
+$("log").addEventListener("click",function(ev){
+ var tg=ev.target.closest("[data-a],[data-del]");if(!tg)return;
+ if(tg.dataset.a==="adderr"){var v=$("le").value.trim();if(v){addErr(v,$("ls").value);renderLog();renderToday()}}
+ else if(tg.dataset.del){touchErr(tg.dataset.del,function(e){e.del=1});renderLog();renderToday()}
+});
+$("log").addEventListener("change",function(ev){
+ var n=ev.target;if(n.dataset.r){touchErr(n.dataset.r,function(e){e.rv=n.checked?Date.now():0});renderLog();renderToday()}
+});
+
+/* ---------- sync ---------- */
+var timer=null,busy=false;
+function url(){var b=(C.fb||"").trim().replace(/\/+$/,""),cd=(C.code||"").trim();return b&&cd?b+"/ielts/"+encodeURIComponent(cd)+".json":""}
+function msg(t){var e=$("sst");if(e)e.textContent=t}
+function pub(){return {done:S.done,un:S.un,hours:S.hours,hTs:S.hTs,start:S.start,sTs:S.sTs,months:S.months,mTs:S.mTs,log:S.log,notes:S.notes,errs:S.errs}}
+function mergeMap(f,r){var ch=false;r=r||{};for(var k in r){var a=S[f][k];if(!(a&&(a.t||0)>=(r[k].t||0))){S[f][k]=r[k];ch=true}}return ch}
+function mergeIn(R){
+ var ch=false;if(!R)return ch;
+ ["done","un"].forEach(function(f){var r=R[f]||{};for(var k in r){if(!((S[f][k]||0)>=r[k])){S[f][k]=r[k];ch=true}}});
+ if((R.hTs||0)>(S.hTs||0)){S.hours=R.hours||0;S.hTs=R.hTs;ch=true}
+ if((R.sTs||0)>(S.sTs||0)&&R.start){S.start=R.start;S.sTs=R.sTs;ch=true}
+ if((R.mTs||0)>(S.mTs||0)&&R.months){S.months=R.months;S.mTs=R.mTs;ch=true}
+ ["log","notes","errs"].forEach(function(f){if(mergeMap(f,R[f]))ch=true});
+ return ch;
+}
+function refreshAll(){build();stats();renderToday();renderLog();$("start").value=S.start;fillMonths()}
+function sync(manual){
+ var u=url();
+ if(!u){if(manual)msg("Укажите адрес базы и код.");return}
+ if(busy)return;busy=true;msg("Синхронизация…");
+ fetch(u).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(R){
+  var ch=mergeIn(R);save();if(ch)refreshAll();
+  return fetch(u,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(pub())});
+ }).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);busy=false;msg("Синхронизировано в "+new Date().toLocaleTimeString("ru-RU"))})
+ .catch(function(e){busy=false;msg("Ошибка: "+e.message+". Проверьте адрес, правила и интернет.")});
+}
+function push(){if(!url())return;clearTimeout(timer);timer=setTimeout(function(){sync(false)},1500)}
+
+/* ---------- wiring ---------- */
+function fillMonths(){
+ var sel=$("mon"),opts=[6,9,12,15,18,21,24,30,36];
+ if(opts.indexOf(N())<0){opts.push(N());opts.sort(function(a,b){return a-b})}
+ sel.innerHTML=opts.map(function(m){return '<option value="'+m+'"'+(m===N()?' selected':'')+'>'+m+'</option>'}).join("");
+}
+$("mon").addEventListener("change",function(){S.months=Number($("mon").value);S.mTs=Date.now();save();push();build();stats();renderToday()});
+$("start").value=S.start;
+$("start").addEventListener("change",function(){if(!$("start").value)return;S.start=$("start").value;S.sTs=Date.now();save();push();build();stats();renderToday()});
+document.querySelectorAll("[data-h]").forEach(function(b){b.addEventListener("click",function(){addMin(parseInt(b.dataset.h,10));stats();renderToday();renderLog()})});
+function showTab(id){
+ document.querySelectorAll("#tabs button").forEach(function(x){x.classList.toggle("on",x.dataset.t===id)});
+ ["today","track","log","rhythm","src","sync"].forEach(function(s){var n=$(s);n.classList.toggle("hide",s!==id);n.classList.remove("view");if(s===id){void n.offsetWidth;n.classList.add("view")}});
+ if(id==="today"){lastMode=null;renderToday()}
  window.scrollTo(0,0);
-})});
-build();stats();where();
-var fbu=document.getElementById("fbu"),fbc=document.getElementById("fbc");
+}
+document.querySelectorAll("#tabs button").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.t);if(b.dataset.t==="today")renderToday();if(b.dataset.t==="log")renderLog()})});
+var fbu=$("fbu"),fbc=$("fbc");
 fbu.value=C.fb;fbc.value=C.code;
 fbu.addEventListener("change",function(){C.fb=fbu.value.trim();saveC()});
 fbc.addEventListener("change",function(){C.code=fbc.value.trim();saveC()});
-document.getElementById("gen").addEventListener("click",function(){
+$("gen").addEventListener("click",function(){
  var a=new Uint8Array(16);crypto.getRandomValues(a);
  C.code=Array.prototype.map.call(a,function(x){return("0"+x.toString(16)).slice(-2)}).join("");
  fbc.value=C.code;saveC();msg("Код создан. Скопируйте его на другое устройство.");
 });
-document.getElementById("syncnow").addEventListener("click",function(){C.fb=fbu.value.trim();C.code=fbc.value.trim();saveC();sync(true)});
-document.addEventListener("visibilitychange",function(){if(!document.hidden)sync(false)});
+$("syncnow").addEventListener("click",function(){C.fb=fbu.value.trim();C.code=fbc.value.trim();saveC();sync(true)});
+document.addEventListener("visibilitychange",function(){if(!document.hidden){renderToday();sync(false)}});
+
+var TH="auto";try{TH=localStorage.getItem("ielts-theme")||"auto"}catch(e){}
+var ICON={auto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>',light:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>',dark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>'};
+var TL={auto:"Тема: как в системе",light:"Тема: светлая",dark:"Тема: тёмная"};
+function applyTheme(){document.documentElement.setAttribute("data-theme",TH);var b=$("th");b.innerHTML=ICON[TH];b.setAttribute("aria-label",TL[TH]);b.title=TL[TH]}
+$("th").addEventListener("click",function(){TH=TH==="auto"?"light":TH==="light"?"dark":"auto";try{localStorage.setItem("ielts-theme",TH)}catch(e){}applyTheme();toast(TL[TH])});
+applyTheme();
+fillMonths();build();stats();renderToday();renderLog();
+if(C.rem&&C.rem.on)setReminder();
 sync(false);
 </script>
 </body>
